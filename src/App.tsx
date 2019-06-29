@@ -11,14 +11,21 @@ const App: React.FC = () => {
 
   // stateはunknown型のため型アサーションが必要
   // 第二引数は、余計なレンダリングを避けるためのstateの前後の状態を比較する関数
-  const app = useSelector((state: { app: AppState }) => {
-    return state.app;
-  }, shallowEqual);
+  const app = useSelector(
+    (state: { app: AppState }) => state.app,
+    shallowEqual,
+  );
 
-  const setValue = () => dispatch(appModule.actions.setValue('aaa'));
+  const inputEl = React.useRef<HTMLInputElement>(null);
 
-  function handleClick() {
-    setValue();
+  function setValue(value: string): void {
+    dispatch(appModule.actions.setValue(value));
+  }
+
+  function handleClick(): void {
+    const input = inputEl.current;
+    const value = input ? input.value : '';
+    setValue(value);
   }
 
   return (
@@ -27,7 +34,7 @@ const App: React.FC = () => {
         <img src={logo} className="App-logo" alt="logo" />
       </header>
 
-      <input />
+      <input ref={inputEl} type="text" />
       <button onClick={handleClick}>send</button>
 
       <p>{app.value}</p>
