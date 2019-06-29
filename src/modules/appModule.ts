@@ -1,4 +1,4 @@
-import { createSlice } from 'redux-starter-kit';
+import { createSlice, PayloadAction } from 'redux-starter-kit';
 
 import { AppState, appState } from '../appState';
 
@@ -12,11 +12,9 @@ const appModule = createSlice({
   initialState: appState,
   // Key名はActionを生成する時に使われる
   reducers: {
-    setValue(state: AppState, action: any): AppState {
-      return {
-        ...state,
-        value: action.payload,
-      };
+    setValue(state: AppState, action: PayloadAction<string>): void {
+      // immerによりmutateしてもOK
+      state.value = action.payload;
     },
   },
 });
