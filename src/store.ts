@@ -4,7 +4,7 @@ import {
   getDefaultMiddleware,
 } from 'redux-starter-kit';
 
-import appModule from './modules/appModule';
+import { appModule } from './modules/appModule';
 // reducer
 const reducer = combineReducers({
   app: appModule.reducer,

@@ -4,7 +4,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 import { AppState } from './appState';
-import appModule from './modules/appModule';
+import { appModule, setValueAsync } from './modules/appModule';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const App: React.FC = () => {
   const inputEl = React.useRef<HTMLInputElement>(null);
 
   function setValue(value: string): void {
-    dispatch(appModule.actions.setValue(value));
+    dispatch(setValueAsync(value));
   }
 
   function handleClick(): void {
